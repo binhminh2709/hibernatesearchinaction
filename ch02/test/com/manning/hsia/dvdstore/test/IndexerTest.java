@@ -31,8 +31,12 @@ public class IndexerTest extends TestCase {
 		item.setTitle("Batman Begins");
 		item.setEan("1234567890123");
 		item.setDescription("Batman Begins explores the genese of the super hero...");
+
+		for (int i = 0; i < 100; i++) {
+			s.persist(item);
+		}
 		
-		s.persist(item);
+
 		
 		tx.commit();
 		s.close();
