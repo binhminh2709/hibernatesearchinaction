@@ -17,7 +17,6 @@ public class TestCase {
 
 	@AfterTest(groups="ch03", alwaysRun=true)
 	protected void tearDown() throws Exception {
-		// TODO Auto-generated method stub
 		factory.close();
 	}
 	

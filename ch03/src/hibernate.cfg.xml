@@ -11,15 +11,18 @@
     <property name="hibernate.hbm2ddl.auto">create-drop</property>
     
     <!--  Hibernate Search configuration -->
-    <property name="hibernate.search.default.directory_provider"
-    	>org.hibernate.search.store.RAMDirectoryProvider</property>  <!-- define the directory provider -->
+    <!--<property name="hibernate.search.default.directory_provider">
+      org.hibernate.search.store.RAMDirectoryProvider
+    </property>-->  <!-- define the directory provider -->
+
     <!-- to explore with Luke, use
-    <property name="hibernate.search.default.directory_provider"
-    	>org.hibernate.search.store.FSDirectoryProvider</property>
-    <property name="hibernate.search.default.indexBase"
-    	>./build/indexes</property>
+
      -->
-    
+    <property name="hibernate.search.default.directory_provider">
+      org.hibernate.search.store.FSDirectoryProvider
+    </property>
+    <property name="hibernate.search.default.indexBase">./build/indexes</property>
+
     <mapping class="com.manning.hsia.dvdstore.model.Item"/>
     <mapping class="com.manning.hsia.dvdstore.model.Dvd"/>
     <mapping class="com.manning.hsia.dvdstore.model.Drink"/>
