@@ -3,7 +3,7 @@
     <servlet-name>item</servlet-name>
     <url-pattern>/item</url-pattern>
   </servlet-mapping>
-  
+
   <servlet>
     <servlet-name>item</servlet-name>
     <servlet-class>com.manning.hsia.dvdstore.web.WebController</servlet-class>

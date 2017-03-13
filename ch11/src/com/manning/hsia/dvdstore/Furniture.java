@@ -11,24 +11,26 @@ import javax.persistence.Id;
 @Indexed
 @Analyzer(impl = StandardAnalyzer.class)
 public class Furniture {
-	@Id @GeneratedValue @DocumentId
-	private Integer id;
-	@Field(index = Index.TOKENIZED, store = Store.YES )
-	private String color;
+  @Id
+  @GeneratedValue
+  @DocumentId
+  private Integer id;
+  @Field(index = Index.TOKENIZED, store = Store.YES)
+  private String color;
 
-	public Integer getId() {
-		return id;
-	}
+  public Integer getId() {
+    return id;
+  }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-	public String getColor() {
-		return color;
-	}
+  public String getColor() {
+    return color;
+  }
 
-	public void setColor(String color) {
-		this.color = color;
-	}
+  public void setColor(String color) {
+    this.color = color;
+  }
 }

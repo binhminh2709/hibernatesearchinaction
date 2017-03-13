@@ -17,56 +17,55 @@ import java.io.InputStream;
 import java.util.List;
 
 public class TestMSDocToIndex extends SearchTestCase {
-	private Analyzer analyzer = new StandardAnalyzer();
+  private Analyzer analyzer = new StandardAnalyzer();
 
-	@Test(groups="ch13")
-	public void testExtractFromWordDoc() throws Exception {
-		FullTextSession session = Search.getFullTextSession( openSession() );
-		Transaction tx = session.beginTransaction();
+  @Test(groups = "ch13")
+  public void testExtractFromWordDoc() throws Exception {
+    FullTextSession session = Search.getFullTextSession(openSession());
+    Transaction tx = session.beginTransaction();
 
-		try {
-			File f = new File( "ch13/src/com/manning/hsia/dvdstore/file1.doc" );
-			buildIndex( f.getAbsolutePath(), session, tx );
+    try {
+      File f = new File("ch13/src/com/manning/hsia/dvdstore/file1.doc");
+      buildIndex(f.getAbsolutePath(), session, tx);
 
-			tx = session.beginTransaction();
-			QueryParser parser = new QueryParser( "description", analyzer );
+      tx = session.beginTransaction();
+      QueryParser parser = new QueryParser("description", analyzer);
 
-			Query query = parser.parse( "description" + ":reeves" );
-			org.hibernate.search.FullTextQuery hibQuery = session.createFullTextQuery( query, Dvd.class );
-			List<Dvd> results = hibQuery.list();
+      Query query = parser.parse("description" + ":reeves");
+      org.hibernate.search.FullTextQuery hibQuery = session.createFullTextQuery(query, Dvd.class);
+      List<Dvd> results = hibQuery.list();
 
-			assert results.size() == 2 : "wrong number of results";
-			for (Dvd dvd : results) {
-				assert dvd.getDescription().indexOf( "Reeves" ) >= 0;
-			}
+      assert results.size() == 2 : "wrong number of results";
+      for (Dvd dvd : results) {
+        assert dvd.getDescription().indexOf("Reeves") >= 0;
+      }
 
-			for (Object element : session.createQuery( "from " + Dvd.class.getName() ).list()) session.delete( element );
-			tx.commit();
-		}
-		finally {
-			session.close();
-		}
-	}
+      for (Object element : session.createQuery("from " + Dvd.class.getName()).list()) session.delete(element);
+      tx.commit();
+    } finally {
+      session.close();
+    }
+  }
 
-	private void buildIndex( String filename, FullTextSession session, Transaction tx ) throws Exception {
-		InputStream istream = new FileInputStream( new File( filename ) );
+  private void buildIndex(String filename, FullTextSession session, Transaction tx) throws Exception {
+    InputStream istream = new FileInputStream(new File(filename));
 
-		WordExtractor extractor = new WordExtractor( istream );
-		String[] paragraphs = extractor.getParagraphText();
+    WordExtractor extractor = new WordExtractor(istream);
+    String[] paragraphs = extractor.getParagraphText();
 
-		for (int x = 0; x < paragraphs.length; x++) {
-			Dvd dvd = new Dvd();
-			dvd.setDescription( paragraphs[x] );
-			dvd.setId( x + 1 );
-			session.save( dvd );
-		}
-		tx.commit();
-		session.clear();
-	}
+    for (int x = 0; x < paragraphs.length; x++) {
+      Dvd dvd = new Dvd();
+      dvd.setDescription(paragraphs[x]);
+      dvd.setId(x + 1);
+      session.save(dvd);
+    }
+    tx.commit();
+    session.clear();
+  }
 
-	protected Class[] getMappings() {
-		return new Class[]{
-			Dvd.class
-		};
-	}
+  protected Class[] getMappings() {
+    return new Class[]{
+        Dvd.class
+    };
+  }
 }

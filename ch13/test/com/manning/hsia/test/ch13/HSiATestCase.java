@@ -13,124 +13,119 @@ import org.testng.annotations.BeforeClass;
 import java.io.InputStream;
 
 public abstract class HSiATestCase {
-	private static SessionFactory sessions;
-	private static AnnotationConfiguration cfg;
-	private static Class lastTestClass;
-	private Session session;
+  private static SessionFactory sessions;
+  private static AnnotationConfiguration cfg;
+  private static Class lastTestClass;
+  private Session session;
 
-	public HSiATestCase() {
+  public HSiATestCase() {
 
-	}
+  }
 
-	protected void buildSessionFactory( Class[] classes, String[] packages, String[] xmlFiles ) throws Exception {
+  protected static AnnotationConfiguration getCfg() {
+    return cfg;
+  }
 
-		if ( getSessions() != null ) getSessions().close();
-		try {
-			setCfg( new AnnotationConfiguration() );
-			configure( cfg );
-			if ( recreateSchema() ) {
-				cfg.setProperty( Environment.HBM2DDL_AUTO, "create-drop" );
-			}
-			for (int i = 0; i < packages.length; i++) {
-				getCfg().addPackage( packages[i] );
-			}
-			for (int i = 0; i < classes.length; i++) {
-				getCfg().addAnnotatedClass( classes[i] );
-			}
-			for (int i = 0; i < xmlFiles.length; i++) {
-				InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream( xmlFiles[i] );
-				getCfg().addInputStream( is );
-			}
-			setSessions( getCfg().buildSessionFactory( /*new TestInterceptor()*/ ) );
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			throw e;
-		}
-	}
+  protected static void setCfg(AnnotationConfiguration cfg) {
+    HSiATestCase.cfg = cfg.configure();
+  }
 
-	@BeforeClass(groups="ch13", alwaysRun=true)
-	protected void setUp() throws Exception {
-		if ( getSessions() == null || getSessions().isClosed() || lastTestClass != getClass() ) {
-			buildSessionFactory( getMappings(), getAnnotatedPackages(), getXmlFiles() );
-			lastTestClass = getClass();
-		}
-	}
+  protected void buildSessionFactory(Class[] classes, String[] packages, String[] xmlFiles) throws Exception {
 
-	protected void configure( org.hibernate.cfg.Configuration cfg ) {
-		// will be overridden as necessary in the individual tests
-		cfg.setProperty( "hibernate.search.default.directory_provider", RAMDirectoryProvider.class.getName() );
-		cfg.setProperty( org.hibernate.search.Environment.ANALYZER_CLASS, StandardAnalyzer.class.getName() );
-	}
+    if (getSessions() != null) getSessions().close();
+    try {
+      setCfg(new AnnotationConfiguration());
+      configure(cfg);
+      if (recreateSchema()) {
+        cfg.setProperty(Environment.HBM2DDL_AUTO, "create-drop");
+      }
+      for (int i = 0; i < packages.length; i++) {
+        getCfg().addPackage(packages[i]);
+      }
+      for (int i = 0; i < classes.length; i++) {
+        getCfg().addAnnotatedClass(classes[i]);
+      }
+      for (int i = 0; i < xmlFiles.length; i++) {
+        InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(xmlFiles[i]);
+        getCfg().addInputStream(is);
+      }
+      setSessions(getCfg().buildSessionFactory( /*new TestInterceptor()*/));
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw e;
+    }
+  }
 
-	protected void runTest() throws Throwable {
-		try {
-			if ( session != null && session.isOpen() ) {
-				session.close();
-				session = null;
-				throw new Exception( "unclosed session" );
-			}
-			else {
-				session = null;
-			}
-		}
-		catch (Throwable e) {
-			try {
-				if ( session != null && session.isOpen() ) {
-					session.close();
-				}
-			}
-			catch (Exception ignore) {
-			}
-			try {
-				if ( sessions != null ) {
-					sessions.close();
-					sessions = null;
-				}
-			}
-			catch (Exception ignore) {
-			}
-			throw e;
-		}
-	}
+  @BeforeClass(groups = "ch13", alwaysRun = true)
+  protected void setUp() throws Exception {
+    if (getSessions() == null || getSessions().isClosed() || lastTestClass != getClass()) {
+      buildSessionFactory(getMappings(), getAnnotatedPackages(), getXmlFiles());
+      lastTestClass = getClass();
+    }
+  }
 
-	public Session openSession() throws HibernateException {
-		session = getSessions().openSession();
-		return session;
-	}
+  protected void configure(org.hibernate.cfg.Configuration cfg) {
+    // will be overridden as necessary in the individual tests
+    cfg.setProperty("hibernate.search.default.directory_provider", RAMDirectoryProvider.class.getName());
+    cfg.setProperty(org.hibernate.search.Environment.ANALYZER_CLASS, StandardAnalyzer.class.getName());
+  }
 
-	public Session openSession( Interceptor interceptor ) throws HibernateException {
-		session = getSessions().openSession( interceptor );
-		return session;
-	}
+  protected void runTest() throws Throwable {
+    try {
+      if (session != null && session.isOpen()) {
+        session.close();
+        session = null;
+        throw new Exception("unclosed session");
+      } else {
+        session = null;
+      }
+    } catch (Throwable e) {
+      try {
+        if (session != null && session.isOpen()) {
+          session.close();
+        }
+      } catch (Exception ignore) {
+      }
+      try {
+        if (sessions != null) {
+          sessions.close();
+          sessions = null;
+        }
+      } catch (Exception ignore) {
+      }
+      throw e;
+    }
+  }
 
-	protected abstract Class[] getMappings();
+  public Session openSession() throws HibernateException {
+    session = getSessions().openSession();
+    return session;
+  }
 
-	protected String[] getAnnotatedPackages() {
-		return new String[]{};
-	}
+  public Session openSession(Interceptor interceptor) throws HibernateException {
+    session = getSessions().openSession(interceptor);
+    return session;
+  }
 
-	protected String[] getXmlFiles() {
-		return new String[]{};
-	}
+  protected abstract Class[] getMappings();
 
-	private void setSessions( SessionFactory sessions ) {
-		HSiATestCase.sessions = sessions;
-	}
+  protected String[] getAnnotatedPackages() {
+    return new String[]{};
+  }
 
-	protected SessionFactory getSessions() {
-		return sessions;
-	}
+  protected String[] getXmlFiles() {
+    return new String[]{};
+  }
 
-	protected static void setCfg( AnnotationConfiguration cfg ) {
-		HSiATestCase.cfg = cfg.configure();
-	}
+  protected SessionFactory getSessions() {
+    return sessions;
+  }
 
-	protected static AnnotationConfiguration getCfg() {
-		return cfg;
-	}
+  private void setSessions(SessionFactory sessions) {
+    HSiATestCase.sessions = sessions;
+  }
 
-	protected boolean recreateSchema() {
-		return true;
-	}
+  protected boolean recreateSchema() {
+    return true;
+  }
 }

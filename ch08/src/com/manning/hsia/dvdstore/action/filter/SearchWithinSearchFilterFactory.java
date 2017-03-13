@@ -9,14 +9,14 @@ import org.hibernate.search.annotations.Factory;
  * Example 8.11
  */
 public class SearchWithinSearchFilterFactory {
-	private Query previousQuery;
+  private Query previousQuery;
 
-	public void setPreviousQuery(Query previousQuery) {
-		this.previousQuery = previousQuery;
-	}
-	
-	@Factory
-	public Filter getSearchWithinSearch() {
-		return new QueryWrapperFilter(previousQuery); //wrap previous query in filter
-	}
+  public void setPreviousQuery(Query previousQuery) {
+    this.previousQuery = previousQuery;
+  }
+
+  @Factory
+  public Filter getSearchWithinSearch() {
+    return new QueryWrapperFilter(previousQuery); //wrap previous query in filter
+  }
 }

@@ -21,113 +21,112 @@ import java.io.File;
 import java.util.List;
 
 public class IndexMergeTest extends SearchTestCase {
-	Transaction tx;
+  Transaction tx;
 
-	@Test(groups="ch11")
-	public void testTwoEntitiesNoShards() throws Exception {
-		FullTextSession session = Search.getFullTextSession( openSession() );
-		buildIndex( session );
+  @Test(groups = "ch11")
+  public void testTwoEntitiesNoShards() throws Exception {
+    FullTextSession session = Search.getFullTextSession(openSession());
+    buildIndex(session);
 
-		tx = session.beginTransaction();
-		FullTextSession fullTextSession = Search.getFullTextSession( session );
-		QueryParser parser = new QueryParser( "id", new StandardAnalyzer() );
+    tx = session.beginTransaction();
+    FullTextSession fullTextSession = Search.getFullTextSession(session);
+    QueryParser parser = new QueryParser("id", new StandardAnalyzer());
 
-		List results = fullTextSession.createFullTextQuery( parser.parse( "id:1" ) ).list();
-		assert results.size() == 2 : "Either insert or query failed";
+    List results = fullTextSession.createFullTextQuery(parser.parse("id:1")).list();
+    assert results.size() == 2 : "Either insert or query failed";
 
-		SearchFactory searchFactory = fullTextSession.getSearchFactory();
-		DirectoryProvider[] provider = searchFactory.getDirectoryProviders( MergedAnimal.class );
-		assert provider.length == 1 : "Wrong provider count";
-		org.apache.lucene.store.Directory directory = provider[0].getDirectory();
+    SearchFactory searchFactory = fullTextSession.getSearchFactory();
+    DirectoryProvider[] provider = searchFactory.getDirectoryProviders(MergedAnimal.class);
+    assert provider.length == 1 : "Wrong provider count";
+    org.apache.lucene.store.Directory directory = provider[0].getDirectory();
 
-		BooleanQuery classFilter = new BooleanQuery();
-		classFilter.setBoost( 0 );
+    BooleanQuery classFilter = new BooleanQuery();
+    classFilter.setBoost(0);
 
-		Term t = new Term( DocumentBuilder.CLASS_FIELDNAME, Furniture.class.getName() );
-		TermQuery termQuery = new TermQuery( t );
-		classFilter.add( termQuery, BooleanClause.Occur.SHOULD );
+    Term t = new Term(DocumentBuilder.CLASS_FIELDNAME, Furniture.class.getName());
+    TermQuery termQuery = new TermQuery(t);
+    classFilter.add(termQuery, BooleanClause.Occur.SHOULD);
 
-		Term luceneTerm = new Term( "id", "1" );
-		Query luceneQuery = new TermQuery( luceneTerm );
+    Term luceneTerm = new Term("id", "1");
+    Query luceneQuery = new TermQuery(luceneTerm);
 
-		BooleanQuery filteredQuery = new BooleanQuery();
-		filteredQuery.add( luceneQuery, BooleanClause.Occur.MUST );
-		filteredQuery.add( classFilter, BooleanClause.Occur.MUST );
+    BooleanQuery filteredQuery = new BooleanQuery();
+    filteredQuery.add(luceneQuery, BooleanClause.Occur.MUST);
+    filteredQuery.add(classFilter, BooleanClause.Occur.MUST);
 
-		IndexSearcher searcher = null;
-		try {
-			searcher = new IndexSearcher( directory );
+    IndexSearcher searcher = null;
+    try {
+      searcher = new IndexSearcher(directory);
 
-			TopDocCollector collector = new TopDocCollector( 2 );
-			searcher.search( filteredQuery, collector );
-			ScoreDoc[] hits = collector.topDocs().scoreDocs;
+      TopDocCollector collector = new TopDocCollector(2);
+      searcher.search(filteredQuery, collector);
+      ScoreDoc[] hits = collector.topDocs().scoreDocs;
 
-			int docId = hits[0].doc;
+      int docId = hits[0].doc;
 
-			assert hits.length == 1 : "Wrong hit count";
+      assert hits.length == 1 : "Wrong hit count";
 
-			Document doc = searcher.doc( docId );
-			assert doc.get( "color" ).equals( "dark blue" );
+      Document doc = searcher.doc(docId);
+      assert doc.get("color").equals("dark blue");
 
-			for (Object o : results) session.delete( o );
-			tx.commit();
-		}
-		finally {
-			if ( searcher != null )
-				searcher.close();
-			session.close();
-		}
-	}
+      for (Object o : results) session.delete(o);
+      tx.commit();
+    } finally {
+      if (searcher != null)
+        searcher.close();
+      session.close();
+    }
+  }
 
-	private void buildIndex
-		( FullTextSession
-			session ) {
-		Transaction tx = session.beginTransaction();
+  private void buildIndex
+      (FullTextSession
+           session) {
+    Transaction tx = session.beginTransaction();
 
-		MergedAnimal a = new MergedAnimal();
-		a.setId( 1 );
-		a.setName( "Elephant" );
-		session.save( a );
+    MergedAnimal a = new MergedAnimal();
+    a.setId(1);
+    a.setName("Elephant");
+    session.save(a);
 
-		Furniture fur = new Furniture();
-		fur.setColor( "dark blue" );
-		session.save( fur );
+    Furniture fur = new Furniture();
+    fur.setColor("dark blue");
+    session.save(fur);
 
-		tx.commit();
-		session.clear();
-	}
+    tx.commit();
+    session.clear();
+  }
 
-	@BeforeClass(groups="ch11", alwaysRun=true)
-	protected void setUp
-		() throws Exception {
-		File sub = locateBaseDir();
-		File[] files = sub.listFiles();
-		if ( files != null ) {
-			for (File file : files) {
-				if ( file.isDirectory() ) {
-					delete( file );
-				}
-			}
-		}
-		buildSessionFactory( getMappings(), getAnnotatedPackages(), getXmlFiles() );
-	}
+  @BeforeClass(groups = "ch11", alwaysRun = true)
+  protected void setUp
+      () throws Exception {
+    File sub = locateBaseDir();
+    File[] files = sub.listFiles();
+    if (files != null) {
+      for (File file : files) {
+        if (file.isDirectory()) {
+          delete(file);
+        }
+      }
+    }
+    buildSessionFactory(getMappings(), getAnnotatedPackages(), getXmlFiles());
+  }
 
-	@Override
-	protected void configure
-		( Configuration
-			cfg ) {
-		super.configure( cfg );
-		cfg.setProperty( "hibernate.search.default.directory_provider", FSDirectoryProvider.class.getName() );
-		File sub = locateBaseDir();
-		cfg.setProperty( "hibernate.search.default.indexBase", sub.getAbsolutePath() );
-		cfg.setProperty( "hibernate.search.com.manning.hsia.dvdstore.Furniture.indexName", "Animal" );
-	}
+  @Override
+  protected void configure
+      (Configuration
+           cfg) {
+    super.configure(cfg);
+    cfg.setProperty("hibernate.search.default.directory_provider", FSDirectoryProvider.class.getName());
+    File sub = locateBaseDir();
+    cfg.setProperty("hibernate.search.default.indexBase", sub.getAbsolutePath());
+    cfg.setProperty("hibernate.search.com.manning.hsia.dvdstore.Furniture.indexName", "Animal");
+  }
 
-	protected Class[] getMappings
-		() {
-		return new Class[]{
-			MergedAnimal.class,
-			Furniture.class
-		};
-	}
+  protected Class[] getMappings
+      () {
+    return new Class[]{
+        MergedAnimal.class,
+        Furniture.class
+    };
+  }
 }

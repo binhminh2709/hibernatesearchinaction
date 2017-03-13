@@ -10,26 +10,26 @@ import javax.persistence.Id;
 @Indexed(index = "Animal")
 @Analyzer(impl = StandardAnalyzer.class)
 public class MergedAnimal {
-	@Id
-	@DocumentId
-	private Integer id;
-	@Field(index = Index.TOKENIZED, store= Store.YES)
-	private String name;
+  @Id
+  @DocumentId
+  private Integer id;
+  @Field(index = Index.TOKENIZED, store = Store.YES)
+  private String name;
 
 
-	public Integer getId() {
-		return id;
-	}
+  public Integer getId() {
+    return id;
+  }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-	public String getName() {
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 }

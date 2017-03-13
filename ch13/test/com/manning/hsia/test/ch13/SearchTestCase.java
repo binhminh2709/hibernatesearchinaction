@@ -14,67 +14,66 @@ import java.io.IOException;
 
 public abstract class SearchTestCase extends HSiATestCase {
 
-	private static final Logger log = LoggerFactory.getLogger( SearchTestCase.class );
-	private static File indexDir;
+  private static final Logger log = LoggerFactory.getLogger(SearchTestCase.class);
+  private static File indexDir;
 
-	static {
-		File current = getAbsoluteDir();
-		indexDir = new File( current, "indextemp" );
-		log.debug( "Using {} as index directory.", indexDir.getAbsolutePath() );
-	}
+  static {
+    File current = getAbsoluteDir();
+    indexDir = new File(current, "indextemp");
+    log.debug("Using {} as index directory.", indexDir.getAbsolutePath());
+  }
 
-	@SuppressWarnings( "unchecked" )
-	protected Directory getDirectory( Class clazz ) {
-		return getLuceneEventListener().getSearchFactoryImplementor().getDirectoryProviders( clazz )[0].getDirectory();
-	}
+  protected static File getAbsoluteDir() {
+    File file = new File("dvd_index");
+    String absPath = file.getAbsolutePath();
 
-	protected void delete( File sub ) {
-		if ( sub.isDirectory() ) {
-			for (File file : sub.listFiles()) {
-				delete( file );
-			}
-			sub.delete();
-		}
-		else {
-			sub.delete();
-		}
-	}
+    return new File(absPath);
+  }
 
-	private FullTextIndexEventListener getLuceneEventListener() {
-		PostInsertEventListener[] listeners = ( (SessionFactoryImpl) getSessions() ).getEventListeners().getPostInsertEventListeners();
-		FullTextIndexEventListener listener = null;
-		for (PostInsertEventListener candidate : listeners) {
-			if ( candidate instanceof FullTextIndexEventListener ) {
-				listener = (FullTextIndexEventListener) candidate;
-				break;
-			}
-		}
-		if ( listener == null ) throw new HibernateException( "Lucene event listener not initialized" );
-		return listener;
-	}
+  @SuppressWarnings("unchecked")
+  protected Directory getDirectory(Class clazz) {
+    return getLuceneEventListener().getSearchFactoryImplementor().getDirectoryProviders(clazz)[0].getDirectory();
+  }
 
-	protected File locateBaseDir() {
-		return indexDir;
-	}
+  protected void delete(File sub) {
+    if (sub.isDirectory()) {
+      for (File file : sub.listFiles()) {
+        delete(file);
+      }
+      sub.delete();
+    } else {
+      sub.delete();
+    }
+  }
 
-	protected static File getAbsoluteDir() {
-		File file = new File( "dvd_index" );
-		String absPath = file.getAbsolutePath();
+  private FullTextIndexEventListener getLuceneEventListener() {
+    PostInsertEventListener[] listeners = ((SessionFactoryImpl) getSessions()).getEventListeners().getPostInsertEventListeners();
+    FullTextIndexEventListener listener = null;
+    for (PostInsertEventListener candidate : listeners) {
+      if (candidate instanceof FullTextIndexEventListener) {
+        listener = (FullTextIndexEventListener) candidate;
+        break;
+      }
+    }
+    if (listener == null) throw new HibernateException("Lucene event listener not initialized");
+    return listener;
+  }
 
-		return new File( absPath );
-	}
+  protected File locateBaseDir() {
+    return indexDir;
+  }
 
-	protected void copyIndexes() throws IOException {
+  protected void copyIndexes() throws IOException {
 //      File actorSrcDir = new File(new File("dvd_index_backup/com.jboss.dvd.seam.Actor").getAbsolutePath());
 //      File categorySrcDir = new File(new File("dvd_index_backup/com.jboss.dvd.seam.Category").getAbsolutePath());
-		File productSrcDir = new File( new File( "dvd_index_backup/com.manning.hsia.test.Product" ).getAbsolutePath() );
+    File productSrcDir = new File(new File("dvd_index_backup/com.manning.hsia.test.Product").getAbsolutePath());
 
 //      File actorDestDir = new File(locateBaseDir().getAbsolutePath() + "/com.jboss.dvd.seam.Actor");
 //      File categoryDestDir = new File(locateBaseDir().getAbsolutePath() + "/com.jboss.dvd.seam.Category");
-		File productDestDir = new File( locateBaseDir().getAbsolutePath() + "/com.manning.hsia.test.Product" );
+    File productDestDir = new File(locateBaseDir().getAbsolutePath() + "/com.manning.hsia.test.Product");
 
 //      FileUtils.copyDirectory(actorSrcDir, actorDestDir);
 //      FileUtils.copyDirectory(categorySrcDir, categoryDestDir);
-		FileUtils.copyDirectory( productSrcDir, productDestDir );
-	}
+    FileUtils.copyDirectory(productSrcDir, productDestDir);
+  }
 }

@@ -9,16 +9,16 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
-@Analyzer( impl = StandardAnalyzer.class )
+@Analyzer(impl = StandardAnalyzer.class)
 @Indexed
 public class Product
-	implements Serializable {
-	private static final long serialVersionUID = -5378546367347755065L;
+    implements Serializable {
+  private static final long serialVersionUID = -5378546367347755065L;
 
-	long productId;
-	//	String asin;
-	String title;
-	String description;
+  long productId;
+  //	String asin;
+  String title;
+  String description;
 //	String imageURL;
 //	BigDecimal price = BigDecimal.ZERO;
 
@@ -26,17 +26,17 @@ public class Product
 //	Set<Category> categories;
 //	Inventory inventory;
 
-	@Id
-	@GeneratedValue
+  @Id
+  @GeneratedValue
 //	@Column( name = "PROD_ID" )
-	@DocumentId
-	public long getProductId() {
-		return productId;
-	}
+  @DocumentId
+  public long getProductId() {
+    return productId;
+  }
 
-	public void setProductId( long id ) {
-		this.productId = id;
-	}
+  public void setProductId(long id) {
+    this.productId = id;
+  }
 
 //	@Column( name = "ASIN", length = 16 )
 //	@Field( index = Index.UN_TOKENIZED )
@@ -83,25 +83,25 @@ public class Product
 //		this.categories = categories;
 //	}
 
-	//	@Column( name = "TITLE", nullable = false, length = 100 )
-	@Field( index = Index.TOKENIZED, store = Store.YES )
-	public String getTitle() {
-		return title;
-	}
+  //	@Column( name = "TITLE", nullable = false, length = 100 )
+  @Field(index = Index.TOKENIZED, store = Store.YES)
+  public String getTitle() {
+    return title;
+  }
 
-	public void setTitle( String title ) {
-		this.title = title;
-	}
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-	//	@Column( name = "DESCRIPTION", length = 1024 )
-	@Field( index = Index.TOKENIZED, store = Store.YES )
-	public String getDescription() {
-		return description;
-	}
+  //	@Column( name = "DESCRIPTION", length = 1024 )
+  @Field(index = Index.TOKENIZED, store = Store.YES)
+  public String getDescription() {
+    return description;
+  }
 
-	public void setDescription( String description ) {
-		this.description = description;
-	}
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
 //	@Column( name = "IMAGE_URL", length = 256 )
 //	public String getImageURL() {

@@ -6,10 +6,10 @@ import org.hibernate.search.bridge.LuceneOptions;
 
 public class ItemPromotionBridge implements FieldBridge {
 
-	public void set(String name, Object value, Document document,
-			LuceneOptions luceneOptions) {
-		// TODO Auto-generated method stub
-		
-	}
+  public void set(String name, Object value, Document document,
+                  LuceneOptions luceneOptions) {
+    // TODO Auto-generated method stub
+
+  }
 
 }

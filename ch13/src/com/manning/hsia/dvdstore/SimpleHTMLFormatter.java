@@ -4,28 +4,28 @@ import org.apache.lucene.search.highlight.Formatter;
 import org.apache.lucene.search.highlight.TokenGroup;
 
 public class SimpleHTMLFormatter implements Formatter {
-	String preTag;
-	String postTag;
+  String preTag;
+  String postTag;
 
-	public SimpleHTMLFormatter(String preTag, String postTag) {
-		this.preTag = preTag;
-		this.postTag = postTag;
-	}
+  public SimpleHTMLFormatter(String preTag, String postTag) {
+    this.preTag = preTag;
+    this.postTag = postTag;
+  }
 
-	public SimpleHTMLFormatter() {
-		this.preTag = "<B>";
-		this.postTag = "</B>";
-	}
+  public SimpleHTMLFormatter() {
+    this.preTag = "<B>";
+    this.postTag = "</B>";
+  }
 
-	public String highlightTerm(String originalText, TokenGroup tokenGroup) {
-		StringBuffer returnBuffer;
-		if (tokenGroup.getTotalScore() > 0) {
-			returnBuffer = new StringBuffer();
-			returnBuffer.append(preTag);
-			returnBuffer.append(originalText);
-			returnBuffer.append(postTag);
-			return returnBuffer.toString();
-		}
-		return originalText;
-	}
+  public String highlightTerm(String originalText, TokenGroup tokenGroup) {
+    StringBuffer returnBuffer;
+    if (tokenGroup.getTotalScore() > 0) {
+      returnBuffer = new StringBuffer();
+      returnBuffer.append(preTag);
+      returnBuffer.append(originalText);
+      returnBuffer.append(postTag);
+      return returnBuffer.toString();
+    }
+    return originalText;
+  }
 }
