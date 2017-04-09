@@ -23,8 +23,6 @@ public class PaddedRoundedPriceBridge implements StringBridge {
       throw new IllegalArgumentException(PaddedRoundedPriceBridge.class //raise runtime exceptions on error
           + " used one a non double type: " + value.getClass());
     }
-
-
   }
 
   private long round(double price) {

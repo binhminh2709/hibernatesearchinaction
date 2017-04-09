@@ -19,8 +19,6 @@ public class PaddedPriceBridge implements TwoWayStringBridge {   //implements Tw
       throw new IllegalArgumentException(PaddedRoundedPriceBridge.class
           + " used one a non double type: " + value.getClass());
     }
-
-
   }
 
   public Object stringToObject(String price) {  //reverse objectToString work

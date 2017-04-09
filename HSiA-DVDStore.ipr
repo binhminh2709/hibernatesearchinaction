@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project relativePaths="true" version="4">
-  <component name="AntConfiguration">
-    <defaultAnt bundledAnt="true" />
-  </component>
+<project version="4">
   <component name="BuildJarProjectSettings">
     <option name="BUILD_JARS_ON_MAKE" value="false" />
   </component>
@@ -43,8 +40,6 @@
     <option name="USE_PER_PROJECT_SETTINGS" value="false" />
   </component>
   <component name="CompilerConfiguration">
-    <option name="DEFAULT_COMPILER" value="Javac" />
-    <option name="DEPLOY_AFTER_MAKE" value="0" />
     <resourceExtensions>
       <entry name=".+\.(properties|xml|html|dtd|tld)" />
       <entry name=".+\.(gif|png|jpeg|jpg)" />
@@ -110,6 +105,56 @@
     <option name="TAG_AFTER_PROJECT_COMMIT_NAME" value="" />
     <option name="CLEAN_COPY" value="false" />
   </component>
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="53844235-3b88-401c-8a65-cc22e380255d">
+      <driver-ref>h2.unified</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/ch02/src/hibernate.cfg.xml</remarks>
+      <jdbc-driver>org.h2.Driver</jdbc-driver>
+      <jdbc-url>jdbc:h2:mem:</jdbc-url>
+      <libraries>
+        <library>
+          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/H2/1.4.192/h2-1.4.192.jar</url>
+        </library>
+        <library>
+          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/H2/1.4.192/h2-license.txt</url>
+        </library>
+      </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="hibernate-no-annotation.cfg.xml/Hibernate" uuid="b944f2f7-713f-4cbf-a875-27a876bd7a35">
+      <driver-ref>h2.unified</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/ch02/src/hibernate-no-annotation.cfg.xml</remarks>
+      <jdbc-driver>org.h2.Driver</jdbc-driver>
+      <jdbc-url>jdbc:h2:mem:</jdbc-url>
+      <libraries>
+        <library>
+          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/H2/1.4.192/h2-1.4.192.jar</url>
+        </library>
+        <library>
+          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/H2/1.4.192/h2-license.txt</url>
+        </library>
+      </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="dvdstore-catalog/Hibernate" uuid="86843e49-d2ec-4490-99e4-232e950b46d3">
+      <driver-ref>h2.unified</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/ch02/src/META-INF/persistence.xml</remarks>
+      <jdbc-driver>org.h2.Driver</jdbc-driver>
+      <jdbc-url>jdbc:h2:mem:</jdbc-url>
+      <libraries>
+        <library>
+          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/H2/1.4.192/h2-1.4.192.jar</url>
+        </library>
+        <library>
+          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/H2/1.4.192/h2-license.txt</url>
+        </library>
+      </libraries>
+    </data-source>
+  </component>
   <component name="DependenciesAnalyzeManager">
     <option name="myForwardDirection" value="false" />
   </component>
@@ -130,8 +175,8 @@
     <option name="ADDITIONAL_OPTIONS_STRING" value="" />
     <option name="MAXIMUM_HEAP_SIZE" value="128" />
   </component>
-  <component name="EntryPointsManager">
-    <entry_points version="2.0" />
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/ch03/build/indexes/com.manning.hsia.dvdstore.model.Dvd/_0.cfs" charset="ISO-8859-1" />
   </component>
   <component name="ExportToHTMLSettings">
     <option name="PRINT_LINE_NUMBERS" value="false" />
@@ -142,13 +187,6 @@
     <autodetection-disabled>
       <facet-type id="hibernate">
         <modules>
-          <module name="ch05">
-            <files>
-              <file url="file://$PROJECT_DIR$/ch05/bin/hibernate.cfg.xml" />
-              <file url="file://$PROJECT_DIR$/ch05/build/classes/hibernate.cfg.xml" />
-              <file url="file://$PROJECT_DIR$/ch05/src/hibernate.cfg.xml" />
-            </files>
-          </module>
           <module name="ch02">
             <files>
               <file url="file://$PROJECT_DIR$/ch02/bin/hibernate-no-annotation.cfg.xml" />
@@ -157,26 +195,6 @@
               <file url="file://$PROJECT_DIR$/ch02/build/classes/hibernate.cfg.xml" />
               <file url="file://$PROJECT_DIR$/ch02/src/hibernate-no-annotation.cfg.xml" />
               <file url="file://$PROJECT_DIR$/ch02/src/hibernate.cfg.xml" />
-            </files>
-          </module>
-          <module name="ch06">
-            <files>
-              <file url="file://$PROJECT_DIR$/ch06/bin/hibernate.cfg.xml" />
-              <file url="file://$PROJECT_DIR$/ch06/src/hibernate.cfg.xml" />
-            </files>
-          </module>
-          <module name="ch08">
-            <files>
-              <file url="file://$PROJECT_DIR$/ch08/bin/hibernate.cfg.xml" />
-              <file url="file://$PROJECT_DIR$/ch08/src/hibernate.cfg.xml" />
-            </files>
-          </module>
-          <module name="ch09">
-            <files>
-              <file url="file://$PROJECT_DIR$/ch09/bin/hibernate-test.cfg.xml" />
-              <file url="file://$PROJECT_DIR$/ch09/bin/hibernate.cfg.xml" />
-              <file url="file://$PROJECT_DIR$/ch09/src/hibernate-test.cfg.xml" />
-              <file url="file://$PROJECT_DIR$/ch09/src/hibernate.cfg.xml" />
             </files>
           </module>
           <module name="ch03">
@@ -193,7 +211,34 @@
               <file url="file://$PROJECT_DIR$/ch04/src/hibernate.cfg.xml" />
             </files>
           </module>
+          <module name="ch05">
+            <files>
+              <file url="file://$PROJECT_DIR$/ch05/bin/hibernate.cfg.xml" />
+              <file url="file://$PROJECT_DIR$/ch05/build/classes/hibernate.cfg.xml" />
+              <file url="file://$PROJECT_DIR$/ch05/src/hibernate.cfg.xml" />
+            </files>
+          </module>
+          <module name="ch06">
+            <files>
+              <file url="file://$PROJECT_DIR$/ch06/bin/hibernate.cfg.xml" />
+              <file url="file://$PROJECT_DIR$/ch06/src/hibernate.cfg.xml" />
+            </files>
+          </module>
           <module name="ch07" />
+          <module name="ch08">
+            <files>
+              <file url="file://$PROJECT_DIR$/ch08/bin/hibernate.cfg.xml" />
+              <file url="file://$PROJECT_DIR$/ch08/src/hibernate.cfg.xml" />
+            </files>
+          </module>
+          <module name="ch09">
+            <files>
+              <file url="file://$PROJECT_DIR$/ch09/bin/hibernate-test.cfg.xml" />
+              <file url="file://$PROJECT_DIR$/ch09/bin/hibernate.cfg.xml" />
+              <file url="file://$PROJECT_DIR$/ch09/src/hibernate-test.cfg.xml" />
+              <file url="file://$PROJECT_DIR$/ch09/src/hibernate.cfg.xml" />
+            </files>
+          </module>
           <module name="ch11" />
           <module name="ch12" />
           <module name="ch13" />
@@ -261,38 +306,10 @@
   </component>
   <component name="IdProvider" IDEtalkID="75E4C94DE4ED799D8E7F331E0079BEC0" />
   <component name="InspectionProjectProfileManager">
-    <option name="PROJECT_PROFILE" value="Project Default" />
-    <option name="USE_PROJECT_LEVEL_SETTINGS" value="false" />
-    <scopes />
-    <profiles>
-      <profile version="1.0" is_locked="false">
-        <option name="myName" value="Project Default" />
-        <option name="myLocal" value="false" />
-        <inspection_tool class="EjbErrorInspection" level="ERROR" enabled="false" />
-        <inspection_tool class="EjbWarningInspection" level="WARNING" enabled="false" />
-        <inspection_tool class="EjbDomInspection" level="ERROR" enabled="false" />
-        <inspection_tool class="EjbQlInspection" level="ERROR" enabled="false" />
-        <inspection_tool class="ReferencesToClassesFromDefaultPackagesInJSPFile" level="ERROR" enabled="false" />
-        <inspection_tool class="SelfIncludingJspFiles" level="ERROR" enabled="false" />
-        <inspection_tool class="WebProperties" level="ERROR" enabled="false" />
-        <inspection_tool class="JpaDataSourceORMInspection" level="ERROR" enabled="false" />
-        <inspection_tool class="JpaDataSourceORMDomInspection" level="ERROR" enabled="false" />
-        <inspection_tool class="JpaORMDomInspection" level="ERROR" enabled="false" />
-        <inspection_tool class="JpaModelErrorInspection" level="ERROR" enabled="false" />
-        <inspection_tool class="JpaModelWarningInspection" level="WARNING" enabled="false" />
-        <inspection_tool class="JpaQlInspection" level="ERROR" enabled="false" />
-        <inspection_tool class="JpaQueryApiInspection" level="ERROR" enabled="false" />
-        <inspection_tool class="JpaDomInspection" level="ERROR" enabled="false" />
-      </profile>
-    </profiles>
-    <list size="0" />
-  </component>
-  <component name="JavacSettings">
-    <option name="DEBUGGING_INFO" value="true" />
-    <option name="GENERATE_NO_WARNINGS" value="false" />
-    <option name="DEPRECATION" value="true" />
-    <option name="ADDITIONAL_OPTIONS_STRING" value="" />
-    <option name="MAXIMUM_HEAP_SIZE" value="128" />
+    <profile version="1.0">
+      <option name="myName" value="Project Default" />
+    </profile>
+    <version value="1.0" />
   </component>
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" />
@@ -325,6 +342,7 @@
     <option name="FILTER_INFO" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
+  <component name="MarkdownNavigator.ProfileManager" default="" pdf-export="" />
   <component name="Palette2">
     <group name="Swing">
       <item class="com.intellij.uiDesigner.HSpacer" tooltip-text="Horizontal Spacer" icon="/com/intellij/uiDesigner/icons/hspacer.png" removable="false" auto-create-binding="false" can-attach-label="false">
@@ -450,6 +468,15 @@
     <option name="USE_CLIENT_FILTER" value="true" />
     <option name="CLIENT" value="" />
   </component>
+  <component name="ProjectCodeStyleSettingsManager">
+    <option name="PER_PROJECT_SETTINGS">
+      <value />
+    </option>
+    <option name="PREFERRED_PROJECT_CODE_STYLE" value="Default (1)" />
+  </component>
+  <component name="ProjectDictionaryState">
+    <dictionary name="nguye" />
+  </component>
   <component name="ProjectFileVersion" converted="true" />
   <component name="ProjectModuleManager">
     <modules>
@@ -467,7 +494,7 @@
       <module fileurl="file://$PROJECT_DIR$/ch13/ch13.iml" filepath="$PROJECT_DIR$/ch13/ch13.iml" />
     </modules>
   </component>
-  <component name="ProjectRootManager" version="2" assert-keyword="true" jdk-15="true" project-jdk-name="1.5" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="ResourceManagerContainer">
@@ -530,6 +557,7 @@
       </map>
     </option>
     <option name="myVersion" value="123" />
+    <option name="mySupportsUserInfoFilter" value="true" />
   </component>
   <component name="SvnChangesBrowserSettings">
     <option name="USE_AUTHOR_FIELD" value="true" />
@@ -546,7 +574,6 @@
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="true" />
   </component>
   <component name="VcsDirectoryMappings">
-    <mapping directory="" vcs="" />
     <mapping directory="$PROJECT_DIR$" vcs="svn" />
   </component>
   <component name="VssConfiguration">
@@ -601,10 +628,171 @@
   <component name="com.intellij.profile.ui.ErrorOptionsConfigurable" proportions="" version="1">
     <option name="myLastEditedConfigurable" />
   </component>
+  <component name="dataSourceStorageLocal">
+    <data-source name="hibernate.cfg.xml/Hibernate" uuid="53844235-3b88-401c-8a65-cc22e380255d">
+      <database-info product="H2" version="1.4.192 (2016-05-26)" jdbc-version="4.0" driver-name="H2 JDBC Driver" driver-version="1.4.192 (2016-05-26)">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
+      <auth-required>false</auth-required>
+      <resolve-scope>UNNAMED:public</resolve-scope>
+    </data-source>
+    <data-source name="hibernate-no-annotation.cfg.xml/Hibernate" uuid="b944f2f7-713f-4cbf-a875-27a876bd7a35">
+      <database-info product="H2" version="1.4.192 (2016-05-26)" jdbc-version="4.0" driver-name="H2 JDBC Driver" driver-version="1.4.192 (2016-05-26)">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
+      <auth-required>false</auth-required>
+      <resolve-scope>UNNAMED:public</resolve-scope>
+    </data-source>
+    <data-source name="dvdstore-catalog/Hibernate" uuid="86843e49-d2ec-4490-99e4-232e950b46d3">
+      <database-info product="H2" version="1.4.192 (2016-05-26)" jdbc-version="4.0" driver-name="H2 JDBC Driver" driver-version="1.4.192 (2016-05-26)">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
+      <auth-required>false</auth-required>
+      <resolve-scope>UNNAMED:public</resolve-scope>
+    </data-source>
+  </component>
+  <component name="issues">
+    <option name="index">
+      <map>
+        <entry key="/a.dummy">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/.gitignore">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/HSiA-DVDStore.ipr">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/ch02/.classpath">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/ch02/ch02.iml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/ch02/src/META-INF/persistence.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/ch02/src/hibernate-no-annotation.cfg.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/ch02/src/hibernate.cfg.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/ch02/test/com/manning/hsia/dvdstore/test/IndexerTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/ch02/test/com/manning/hsia/dvdstore/util/TestCase.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/ch03/.classpath">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/ch03/build/indexes/com.manning.hsia.dvdstore.model.Dvd/_0.cfs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/ch03/ch03.iml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/ch03/src/com/manning/hsia/dvdstore/model/Drink.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/ch03/src/com/manning/hsia/dvdstore/model/Item.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/ch03/src/hibernate.cfg.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/ch03/test/com/manning/hsia/dvdstore/test/InheritanceTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/ch03/test/com/manning/hsia/dvdstore/util/TestCase.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/ch04/src/com/manning/hsia/dvdstore/bridge/ItemPromotionBridge.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/ch04/src/com/manning/hsia/dvdstore/bridge/PaddedPriceBridge.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/ch04/src/com/manning/hsia/dvdstore/bridge/PaddedRoundedPriceBridge.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/ch04/src/hibernate.cfg.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/ch04/test/com/manning/hsia/dvdstore/util/TestCase.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/ch04/test/log4j.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/workspace_study/topup/src/main/java/vn/mog/framework/persistence/hinernate/dao/BaseSessionDAOHbnImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/workspace_study/topup/src/main/resources/application.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="testng.defaultConfiguration">
     <outputDirectory />
     <properties />
     <groups />
   </component>
 </project>
-
